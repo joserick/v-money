@@ -74,23 +74,9 @@ export default {
   directives: {money},
 
   computed: {
-  },
-
-  data () {
-    return {
-      formattedValue: ''
-    }
-  },
-
-  watch: {
-    value: {
-      immediate: true,
-      handler (newValue, oldValue) {
-        var formatted = format(newValue, this.$props)
-        if (formatted !== this.formattedValue) {
-          this.formattedValue = formatted
-        }
-      }
+    formattedValue () {
+      const formattedValue = format(this.value, this.$props)
+      return formattedValue
     }
   },
 
