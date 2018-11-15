@@ -3,7 +3,7 @@
          :value="formattedValue"
          @change="change"
          v-money="{precision, decimal, thousands, prefix, suffix, allowBlank, min, max}"
-         :class="className"
+         class="v-money"
          :placeholder="placeholder"
          :id="id"
          :maxlength="maxlength"
@@ -22,10 +22,6 @@ export default {
       required: true,
       type: [Number, String],
       default: 0
-    },
-    class: {
-      type: String,
-      default: 'v-money'
     },
     placeholder: {
       type: String,
@@ -78,9 +74,6 @@ export default {
   directives: {money},
 
   computed: {
-    className() {
-      return this.class;
-    }
   },
 
   data () {
