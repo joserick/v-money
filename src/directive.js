@@ -40,5 +40,4 @@ export default function (el, binding) {
   }
 
   el.oninput()
-  el.dispatchEvent(event('input')) // force format after initialization
 }

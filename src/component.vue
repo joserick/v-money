@@ -1,13 +1,12 @@
 <template lang="html">
   <input type="tel"
          :value="formattedValue"
-         @change="change"
+         v-on="listeners"
          v-money="{precision, decimal, thousands, prefix, suffix, allowBlank, min, max}"
          class="v-money"
          :placeholder="placeholder"
          :id="id"
-         :maxlength="maxlength"
-         @blur="$emit('blur')" />
+         :maxlength="maxlength"/>
 </template>
 
 <script>
@@ -77,13 +76,18 @@ export default {
     formattedValue () {
       const formattedValue = format(this.value, this.$props)
       return formattedValue
+    },
+    listeners: function () {
+      var vm = this
+      return Object.assign({},
+        this.$listeners,
+        {
+          input: function (evt) {
+            vm.$emit('input', vm.masked ? evt.target.value : unformat(evt.target.value, vm.precision))
+          }
+        }
+      )
     }
   },
-
-  methods: {
-    change (evt) {
-      this.$emit('input', this.masked ? evt.target.value : unformat(evt.target.value, this.precision))
-    }
-  }
 }
 </script>
