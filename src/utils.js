@@ -24,11 +24,20 @@ function format (input, opt = defaults) {
   return opt.prefix + negative + joinIntegerAndDecimal(integer, decimal, opt.decimal) + opt.suffix
 }
 
-function unformat (input, precision) {
+function unformat (input, precision, opt = defaults) {
   var negative = input.indexOf('-') >= 0 ? -1 : 1
   var numbers = onlyNumbers(input)
   var currency = numbersToCurrency(numbers, precision)
-  return parseFloat(currency) * negative
+  var output = parseFloat(currency) * negative
+  if (typeof output === 'number') {
+    if (output > opt.max) {
+      output = opt.max
+    } else if (output < opt.min) {
+      output = opt.min
+    }
+    output = output.toFixed(fixed(precision))
+  }
+  return output
 }
 
 function onlyNumbers (input) {
