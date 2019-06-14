@@ -16,7 +16,7 @@ module.exports = {
     },
     plugins: [
       new webpack.DefinePlugin({
-        'proccess.env.VERSION': JSON.stringify(version) // adds MyComponent.version
+        'process.env.VERSION': JSON.stringify(version) // adds MyComponent.version
       })
     ]
   }
