@@ -10,14 +10,14 @@ export {
   VERSION
 }
 
-const install = (Vue, globalOptions) => {
-  if (globalOptions) {
-    Object.keys(globalOptions).map(function(key){
-      options[key] = globalOptions[key]
-    })
-  }
-  Vue.directive('money', VMoney)
-  Vue.component('money', Money)
+export default {
+    install(Vue, globalOptions) {
+        if (globalOptions) {
+            Object.keys(globalOptions).map(function(key){
+                options[key] = globalOptions[key]
+            })
+        }
+        Vue.directive('money', VMoney)
+        Vue.component('money', Money)
+    }
 }
-
-export default install
