@@ -1,7 +1,6 @@
 <template lang="html">
   <input type="tel"
-         :value="formattedValue"
-         @input="onInput"
+         v-model="innerValue"
          v-money="{precision, decimal, thousands, prefix, suffix, allowBlank, min, max}"
          class="v-money"
          :placeholder="placeholder"
@@ -72,13 +71,20 @@ export default {
 
   directives: {money},
 
-  computed: {
-    formattedValue () {
-      return format(this.value, this.$props)
-    },
-    onInput(event) {
-      this.$emit('input', this.masked ? event.target.value : unformat(event.target.value, this.precision))
+  data() {
+    return {
+      innerValue: ''
     }
   },
+
+  watch: {
+    innerValue(newVal, oldVal) {
+      this.$emit('input', this.masked ? newVal : unformat(newVal, this.precision));
+    },
+
+    value(newVal) {
+      this.innerValue = format(newVal, this.$props)
+    }
+  }
 }
 </script>
