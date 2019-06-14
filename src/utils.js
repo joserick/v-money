@@ -1,6 +1,6 @@
 import defaults from './options'
 
-function format (input, opt = defaults) {
+const format = (input, opt = defaults) => {
   if (opt.allowBlank && input == '') {
     return ''
   }
@@ -13,22 +13,22 @@ function format (input, opt = defaults) {
     }
     input = input.toFixed(fixed(opt.precision))
   }
-  var negative = input.indexOf('-') >= 0 ? '-' : ''
+  const negative = input.indexOf('-') >= 0 ? '-' : ''
 
-  var numbers = onlyNumbers(input)
-  var currency = numbersToCurrency(numbers, opt.precision)
-  var parts = toStr(currency).split('.')
-  var integer = parts[0]
-  var decimal = parts[1]
+  const numbers = onlyNumbers(input)
+  const currency = numbersToCurrency(numbers, opt.precision)
+  const parts = toStr(currency).split('.')
+  let integer = parts[0]
+  const decimal = parts[1]
   integer = addThousandSeparator(integer, opt.thousands)
   return opt.prefix + negative + joinIntegerAndDecimal(integer, decimal, opt.decimal) + opt.suffix
 }
 
-function unformat (input, precision, opt = defaults) {
-  var negative = input.indexOf('-') >= 0 ? -1 : 1
-  var numbers = onlyNumbers(input)
-  var currency = numbersToCurrency(numbers, precision)
-  var output = parseFloat(currency) * negative
+const unformat = (input, precision, opt = defaults) => {
+  const negative = input.indexOf('-') >= 0 ? -1 : 1
+  const numbers = onlyNumbers(input)
+  const currency = numbersToCurrency(numbers, precision)
+  let output = parseFloat(currency) * negative
   if (typeof output === 'number') {
     if (output > opt.max) {
       output = opt.max
@@ -40,50 +40,50 @@ function unformat (input, precision, opt = defaults) {
   return output
 }
 
-function onlyNumbers (input) {
+const onlyNumbers = (input) => {
   return toStr(input).replace(/\D+/g, '') || '0'
 }
 
 // Uncaught RangeError: toFixed() digits argument must be between 0 and 20 at Number.toFixed
-function fixed (precision) {
+const fixed = (precision) => {
   return between(0, precision, 20)
 }
 
-function between (min, n, max) {
+const between = (min, n, max) => {
   return Math.max(min, Math.min(n, max))
 }
 
-function numbersToCurrency (numbers, precision) {
-  var exp = Math.pow(10, precision)
-  var float = parseFloat(numbers) / exp
+const numbersToCurrency = (numbers, precision) => {
+  const exp = Math.pow(10, precision)
+  const float = parseFloat(numbers) / exp
   return float.toFixed(fixed(precision))
 }
 
-function addThousandSeparator (integer, separator) {
+const addThousandSeparator = (integer, separator) => {
   return integer.replace(/(\d)(?=(?:\d{3})+\b)/gm, `$1${separator}`)
 }
 
-function currencyToIntegerAndDecimal (float) {
+const currencyToIntegerAndDecimal = (float) => {
   return toStr(float).split('.')
 }
 
-function joinIntegerAndDecimal (integer, decimal, separator) {
+const joinIntegerAndDecimal = (integer, decimal, separator) => {
   return decimal ? integer + separator + decimal : integer
 }
 
-function toStr (value) {
+const toStr = (value) => {
   return value ? value.toString() : ''
 }
 
-function setCursor (el, position) {
-  var setSelectionRange = function () { el.setSelectionRange(position, position) }
+const setCursor = (el, position) => {
+  const setSelectionRange = () => { el.setSelectionRange(position, position) }
   if (el === document.activeElement) {
     setSelectionRange()
     setTimeout(setSelectionRange, 1) // Android Fix
   }
 }
 
-function event (name) {
+const event = (name) => {
   return new Event(name)
 }
 

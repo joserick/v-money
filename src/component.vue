@@ -74,16 +74,14 @@ export default {
 
   computed: {
     formattedValue () {
-      const formattedValue = format(this.value, this.$props)
-      return formattedValue
+      return format(this.value, this.$props)
     },
     listeners: function () {
-      var vm = this
       return Object.assign({},
         this.$listeners,
         {
-          input: function (evt) {
-            vm.$emit('input', vm.masked ? evt.target.value : unformat(evt.target.value, vm.precision))
+          input: (evt) => {
+            this.$emit('input', this.masked ? evt.target.value : unformat(evt.target.value, this.precision))
           }
         }
       )
