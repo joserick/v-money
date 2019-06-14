@@ -85,6 +85,12 @@ export default {
     value(newVal) {
       this.innerValue = format(newVal, this.$props)
     }
-  }
+  },
+
+  created() {
+    if (this.value) {
+      this.innerValue = format(this.value, this.$props);
+    }
+  },
 }
 </script>
