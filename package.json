@@ -34,19 +34,19 @@
   "author": "Marcos Neves <marcos.neves@gmail.com> (https://vuejs-tips.github.io/)",
   "license": "MIT",
   "devDependencies": {
-    "babel-jest": "^21.2.0",
-    "jest": "^21.2.1",
-    "npm-check-updates": "^2.13.0",
-    "size-limit": "^0.11.6",
-    "vue-cli": "2.8.2",
-    "vuetify": "^0.16.7"
+    "babel-jest": "^24.8.0",
+    "jest": "^24.8.0",
+    "npm-check-updates": "^3.1.10",
+    "size-limit": "^1.3.6",
+    "vue-cli": "2.9.6",
+    "vuetify": "^1.5.14"
   },
   "dependencies": {
-    "babel-core": "^6.26.3",
-    "babel-loader": "^7.1.4",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-stage-2": "^6.24.1",
-    "babel-register": "^6.26.0"
+    "@babel/core": "^7.4.5",
+    "babel-loader": "^8.0.6",
+    "@babel/plugin-transform-runtime": "^7.4.4",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-stage-2": "^7.0.0",
+    "@babel/register": "^7.4.4"
   }
 }
