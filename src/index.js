@@ -21,8 +21,3 @@ const install = (Vue, globalOptions) => {
 }
 
 export default install
-
-// Install by default if included from script tag
-if (window && window.Vue) {
-  window.Vue.use(install)
-}
