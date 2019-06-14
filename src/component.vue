@@ -17,9 +17,8 @@ export default {
   name: 'Money',
   props: {
     value: {
-      required: true,
-      type: [Number, String],
-      default: 0
+      required: false,
+      type: [Number, String]
     },
     placeholder: {
       type: String,
@@ -79,6 +78,7 @@ export default {
 
   watch: {
     innerValue(newVal, oldVal) {
+      if (newVal === oldVal) return
       this.$emit('input', this.masked ? newVal : unformat(newVal, this.precision));
     },
 
