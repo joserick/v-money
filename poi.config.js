@@ -11,7 +11,7 @@ const kebabCase = (s) => {
 }
 
 module.exports = {
-    entry: 'src/index.js',
+    entry: demo ? 'src/docs/docs.vue' : 'src/index.js',
     babel: {
         jsx: 'vue'
     },

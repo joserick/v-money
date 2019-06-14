@@ -7,9 +7,9 @@
     "size": "size-limit",
     "upgrade:check": "ncu",
     "upgrade:apply": "ncu -a",
-    "dev": "poi --serve ./src/docs/docs.vue --config ./src/docs/build.config.js --host 0.0.0.0",
+    "dev": "poi --serve ./src/docs/docs.vue --host 0.0.0.0",
     "build": "poi --prod",
-    "docs:build": "poi --prod ./src/docs/docs.vue --config ./src/docs/build.config.js --dist ./docs/",
+    "docs:build": "poi --prod ./src/docs/docs.vue --dist ./docs/",
     "docs:serve": "open http://localhost:5000/docs/ && serve ./",
     "compile": "npm run build -- --disable-compress",
     "test": "jest"
