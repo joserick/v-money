@@ -76,7 +76,7 @@ export default {
     formattedValue () {
       return format(this.value, this.$props)
     },
-    listeners: function () {
+    listeners: () => {
       return Object.assign({},
         this.$listeners,
         {
