@@ -1,7 +1,7 @@
 <template lang="html">
   <input type="tel"
          :value="formattedValue"
-         v-on="listeners"
+         @input="onInput"
          v-money="{precision, decimal, thousands, prefix, suffix, allowBlank, min, max}"
          class="v-money"
          :placeholder="placeholder"
@@ -76,15 +76,8 @@ export default {
     formattedValue () {
       return format(this.value, this.$props)
     },
-    listeners: () => {
-      return Object.assign({},
-        this.$listeners,
-        {
-          input: (evt) => {
-            this.$emit('input', this.masked ? evt.target.value : unformat(evt.target.value, this.precision))
-          }
-        }
-      )
+    onInput(event) {
+      this.$emit('input', this.masked ? event.target.value : unformat(event.target.value, this.precision))
     }
   },
 }
