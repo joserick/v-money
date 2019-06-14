@@ -9,8 +9,5 @@ module.exports = {
             js: name + '.js'
         },
         format: 'cjs'
-    },
-    envs: {
-        VERSION: JSON.stringify(version)
     }
 }
