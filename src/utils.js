@@ -6,11 +6,6 @@ const format = (input, opt = defaults) => {
   }
 
   if (typeof input === 'number') {
-    if (input > opt.max) {
-      input = opt.max
-    } else if (input < opt.min) {
-      input = opt.min
-    }
     input = input.toFixed(fixed(opt.precision))
   }
   const negative = input.indexOf('-') >= 0 ? '-' : ''
@@ -29,15 +24,7 @@ const unformat = (input, precision, opt = defaults) => {
   const numbers = onlyNumbers(input)
   const currency = numbersToCurrency(numbers, precision)
   let output = parseFloat(currency) * negative
-  if (typeof output === 'number') {
-    if (output > opt.max) {
-      output = opt.max
-    } else if (output < opt.min) {
-      output = opt.min
-    }
-    output = output.toFixed(fixed(precision))
-  }
-  return output
+  return output.toFixed(fixed(precision))
 }
 
 const onlyNumbers = (input) => {
