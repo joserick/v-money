@@ -2,9 +2,12 @@
   <input type="tel"
          v-model="innerValue"
          v-money="{precision, decimal, thousands, prefix, suffix, allowBlank, min, max}"
+         v-bind:pattern="pattern"
+         v-on:blur="blur"
          class="v-money"
          :placeholder="placeholder"
          :id="id"
+         :title="minMaxMessage"
          :maxlength="maxlength"/>
 </template>
 
@@ -25,6 +28,9 @@ export default {
       default: ''
     },
     id: {
+      type: String
+    },
+    minMaxMessage: {
       type: String
     },
     maxlength: {
@@ -65,6 +71,10 @@ export default {
     min: {
       type: Number,
       default: () => defaults.min
+    },
+    minMaxBlur: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -72,6 +82,7 @@ export default {
 
   data() {
     return {
+      pattern: ".*",
       innerValue: 0
     }
   },
@@ -79,7 +90,20 @@ export default {
   watch: {
     innerValue(newVal, oldVal) {
       if (newVal === oldVal) return
-      this.$emit('input', this.masked ? newVal : unformat(newVal, this.precision));
+
+      if (this.masked) {
+        this.$emit('input', newVal)
+      }else{
+        let value = unformat(newVal, this.precision, this.$props)
+        if (value > this.$props.max) {
+          this.pattern = this.$props.max
+        } else if (value < this.$props.min) {
+          this.pattern = this.$props.min
+        } else {
+          this.pattern = ".*"
+        }
+        this.$emit('input', value)
+      }
     },
 
     value(newVal) {
@@ -92,5 +116,14 @@ export default {
       this.innerValue = format(this.value, this.$props);
     }
   },
+
+  methods: {
+    blur() {
+      if (typeof this.pattern === 'number' && this.$props.minMaxBlur) {
+        this.$emit('input', this.pattern)
+        this.pattern = ".*"
+      }
+    }
+  }
 }
 </script>

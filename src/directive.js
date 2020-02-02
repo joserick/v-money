@@ -19,7 +19,7 @@ export default (el, binding) => {
   el.onkeydown = (e) => {
     const backspacePressed = e.which == 8 || e.which == 46
     const atEndPosition = (el.value.length - el.selectionEnd) === 0
-    if (opt.allowBlank && backspacePressed && atEndPosition && (unformat(el.value, 0) === 0)) {
+    if (opt.allowBlank && backspacePressed && atEndPosition && (unformat(el.value, 0, opt) === 0)) {
       el.value = ''
       el.dispatchEvent(event('change')) // v-model.lazy
     }
