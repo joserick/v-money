@@ -1,4 +1,4 @@
-# v-money Mask for Vue.js
+﻿# v-money Mask for Vue.js
 
 ![The Mask Money](https://cdn-images-1.medium.com/max/600/1*Rpc289FpghuHrnzyVpOUig.gif)
 
@@ -26,7 +26,7 @@ import money from 'v-money'
 Vue.use(money, {precision: 4})
 ```
 
-### B. Use as component: https://jsfiddle.net/auom8st8/
+### B. Use as component: https://jsfiddle.net/joserick/tgwj6b08/
 
 ```html
 <template>
@@ -53,7 +53,9 @@ Vue.use(money, {precision: 4})
           masked: false,
           allowBlank: false,
           min: Number.MIN_SAFE_INTEGER,
-          max: Number.MAX_SAFE_INTEGER
+          max: Number.MAX_SAFE_INTEGER,
+          minMaxMessage: 'From 100 to 200',
+          minMaxBlur: false
         }
       }
     }
@@ -61,7 +63,7 @@ Vue.use(money, {precision: 4})
 </script>
 ```
 
-### C. Use as directive: https://jsfiddle.net/nj3cLoum/2/
+### C. Use as directive:
 Must use `vmodel.lazy` to bind works properly.
 ```html
 <template>
@@ -86,7 +88,9 @@ Must use `vmodel.lazy` to bind works properly.
           masked: false, /* doesn't work with directive */
           allowBlank: false,
           min: Number.MIN_SAFE_INTEGER,
-          max: Number.MAX_SAFE_INTEGER
+          max: Number.MAX_SAFE_INTEGER,
+          minMaxMessage: 'From 100 to 200',
+          minMaxBlur: false
         }
       }
     },
@@ -98,17 +102,19 @@ Must use `vmodel.lazy` to bind works properly.
 
 ## Properties
 
-| property   | Required | Type    | Default                 | Description                                             |
-|------------|----------|---------|-------------------------|---------------------------------------------------------|
-| precision  | **true** | Number  | 2                       | How many decimal places                                 |
-| decimal    | false    | String  | "."                     | Decimal separator                                       |
-| thousands  | false    | String  | ","                     | Thousands separator                                     |
-| prefix     | false    | String  | ""                      | Currency symbol followed by a Space, like "R$ "         |
-| suffix     | false    | String  | ""                      | Percentage for example: " %"                            |
-| masked     | false    | Boolean | false                   | If the component output should include the mask or not  |
-| allowBlank | false    | Boolean | false                   | If the field can start blank and be cleared out by user |
-| min        | false    | Number  | Number.MIN_SAFE_INTEGER | The min value allowed                                   |
-| max        | false    | Number  | Number.MAX_SAFE_INTEGER | The max value allowed                                   |
+| property      | Required | Type    | Default                 | Description                                                 |
+|---------------|----------|---------|-------------------------|---------------------------------------------------------    |
+| precision     | **true** | Number  | 2                       | How many decimal places                                     |
+| decimal       | false    | String  | "."                     | Decimal separator                                           |
+| thousands     | false    | String  | ","                     | Thousands separator                                         |
+| prefix        | false    | String  | ""                      | Currency symbol followed by a Space, like "R$ "             |
+| suffix        | false    | String  | ""                      | Percentage for example: " %"                                |
+| masked        | false    | Boolean | false                   | If the component output should include the mask or not      |
+| allowBlank    | false    | Boolean | false                   | If the field can start blank and be cleared out by user     |
+| min           | false    | Number  | Number.MIN_SAFE_INTEGER | The min value allowed                                       |
+| max           | false    | Number  | Number.MAX_SAFE_INTEGER | The max value allowed                                       |
+| minMaxMessage | false    | String  | ""                      | Message if exceeding min or max value allowed               |
+| minMaxBlur    | false    | Boolean | false                   | In case of exceeding min or max, overwrite it when deselect |
 
 ### References
 
