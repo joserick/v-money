@@ -5,9 +5,10 @@ module.exports = {
     output: {
         html: false,
         sourceMap: false,
+        moduleName: 'VMoney',
         fileNames: {
             js: name + '.js'
         },
-        format: 'cjs'
+        format: 'umd',
     }
 }
