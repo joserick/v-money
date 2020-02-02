@@ -7,7 +7,7 @@
          class="v-money"
          :placeholder="placeholder"
          :id="id"
-         :title="messageMinMax"
+         :title="minMaxMessage"
          :maxlength="maxlength"/>
 </template>
 
@@ -30,7 +30,7 @@ export default {
     id: {
       type: String
     },
-    messageMinMax: {
+    minMaxMessage: {
       type: String
     },
     maxlength: {
