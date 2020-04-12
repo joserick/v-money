@@ -25,7 +25,7 @@ export default {
     },
     placeholder: {
       type: String,
-      default: ''
+      default: () => defaults.placeholder
     },
     id: {
       type: String
@@ -38,7 +38,7 @@ export default {
     },
     masked: {
       type: Boolean,
-      default: false
+      default: () => defaults.masked
     },
     precision: {
       type: Number,
@@ -72,9 +72,12 @@ export default {
       type: Number,
       default: () => defaults.min
     },
+    step: {
+      type: Number
+    },
     minMaxBlur: {
       type: Boolean,
-      default: false
+      default: () => defaults.minMaxBlur
     }
   },
 
