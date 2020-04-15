@@ -6,13 +6,15 @@ const format = (input, opt = defaults) => {
   }
 
   if (typeof input === 'number') {
-    input = input.toFixed(fixed(opt.precision))
+    var clear = input.toFixed(fixed(opt.precision))
+  }else{
+    var clear = removePrefixSuffix(input, opt)
   }
-  const negative = input.indexOf('-') >= 0 ? '-' : ''
+  const negative = clear.indexOf('-') >= 0 ? '-' : ''
 
-  const numbers = onlyNumbers(input)
+  const numbers = onlyNumbers(clear)
   const currency = numbersToCurrency(numbers, opt.precision)
-  const parts = toStr(currency).split('.')
+  const parts = currencyToIntegerAndDecimal(currency)
   let integer = parts[0]
   const decimal = parts[1]
   integer = addThousandSeparator(integer, opt.thousands)
@@ -20,10 +22,23 @@ const format = (input, opt = defaults) => {
 }
 
 const unformat = (input, precision, opt = defaults) => {
-  const negative = input.indexOf('-') >= 0 ? -1 : 1
-  const numbers = onlyNumbers(input)
+  const clear = removePrefixSuffix(input, opt)
+  const negative = clear.indexOf('-') >= 0 ? -1 : 1
+  const numbers = onlyNumbers(clear)
   const currency = numbersToCurrency(numbers, precision)
   return parseFloat(currency) * negative
+}
+
+const removePrefixSuffix = (input, opt) => {
+  return removeSuffix(removePrefix(input, opt.prefix), opt.suffix)
+}
+
+const removePrefix = (input, prefix) => {
+  return input.startsWith(prefix) ? input.replace(prefix, '') : input
+}
+
+const removeSuffix = (input, suffix) => {
+  return input.endsWith(suffix) ? input.substring(0, input.length - suffix.length) : input
 }
 
 const onlyNumbers = (input) => {
