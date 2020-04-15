@@ -23,8 +23,7 @@ const unformat = (input, precision, opt = defaults) => {
   const negative = input.indexOf('-') >= 0 ? -1 : 1
   const numbers = onlyNumbers(input)
   const currency = numbersToCurrency(numbers, precision)
-  let output = parseFloat(currency) * negative
-  return output.toFixed(fixed(precision))
+  return parseFloat(currency) * negative
 }
 
 const onlyNumbers = (input) => {
