@@ -20,14 +20,18 @@ export default (el, binding) => {
     const backspacePressed = e.which == 8 || e.which == 46
     const atEndPosition = (el.value.length - el.selectionEnd) === 0
     if (opt.allowBlank && backspacePressed && atEndPosition && (unformat(el.value, 0, opt) === 0)) {
-      el.value = ''
+      el.__vue__.innerValue = ''
       el.dispatchEvent(event('change')) // v-model.lazy
     }
   }
 
   el.oninput = () => {
     let positionFromEnd = el.value.length - el.selectionEnd
-    el.value = format(el.value, opt)
+    try{
+      el.__vue__.innerValue = format(el.value, opt)
+    }catch(e){
+      el.value  = format(el.value, opt)
+    }
     positionFromEnd = Math.max(positionFromEnd, opt.suffix.length) // right
     positionFromEnd = el.value.length - positionFromEnd
     positionFromEnd = Math.max(positionFromEnd, opt.prefix.length + 1) // left
@@ -36,7 +40,13 @@ export default (el, binding) => {
   }
 
   el.onfocus = function () {
-    setCursor(el, el.value.length - opt.suffix.length)
+    if (el.selectionEnd < opt.prefix.length) {
+      setCursor(el, opt.prefix.length)
+    }else if(el.selectionEnd > (el.value.length - opt.suffix.length)){
+      setCursor(el, el.value.length - opt.suffix.length)
+    }else{
+      setCursor(el, el.selectionEnd)
+    }
   }
 
   el.oninput()
