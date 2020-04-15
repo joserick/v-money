@@ -5,10 +5,8 @@
          v-bind:pattern="pattern"
          v-on:blur="blur"
          class="v-money"
-         :placeholder="placeholder"
-         :id="id"
          :title="minMaxMessage"
-         :maxlength="maxlength"/>
+         />
 </template>
 
 <script>
@@ -23,18 +21,8 @@ export default {
       required: false,
       type: [Number, String]
     },
-    placeholder: {
-      type: String,
-      default: () => defaults.placeholder
-    },
-    id: {
-      type: String
-    },
     minMaxMessage: {
       type: String
-    },
-    maxlength: {
-      type: Number
     },
     masked: {
       type: Boolean,
@@ -73,11 +61,12 @@ export default {
       default: () => defaults.min
     },
     step: {
-      type: Number
+      type: Number,
+      default: () => defaults.step
     },
-    minMaxBlur: {
+    amend: {
       type: Boolean,
-      default: () => defaults.minMaxBlur
+      default: () => defaults.amend
     }
   },
 
@@ -93,39 +82,42 @@ export default {
   watch: {
     innerValue(newVal, oldVal) {
       if (newVal === oldVal) return
+      let value = this.unformat(newVal)
 
-      if (this.masked) {
-        this.$emit('input', newVal)
-      }else{
-        let value = unformat(newVal, this.precision, this.$props)
-        if (value > this.$props.max) {
-          this.pattern = this.$props.max
-        } else if (value < this.$props.min) {
-          this.pattern = this.$props.min
-        } else {
-          this.pattern = ".*"
-        }
-        this.$emit('input', value)
+      this.$emit('input', this.masked ? newVal : value)
+
+      if (value > this.$props.max) {
+        this.pattern = this.$props.max
+      } else if (value < this.$props.min) {
+        this.pattern = this.$props.min
+      } else {
+        this.pattern = ".*"
       }
     },
 
     value(newVal) {
-      this.innerValue = format(newVal, this.$props)
+      this.innerValue = this.format(newVal)
     }
   },
 
   created() {
     if (this.value) {
-      this.innerValue = format(this.value, this.$props);
+      this.innerValue = this.format(this.value);
     }
   },
 
   methods: {
     blur() {
-      if (typeof this.pattern === 'number' && this.$props.minMaxBlur) {
+      if (typeof this.pattern === 'number' && this.$props.amend) {
         this.$emit('input', this.pattern)
         this.pattern = ".*"
       }
+    },
+    format(value){
+      return format(value, this.$props)
+    },
+    unformat(value){
+      return unformat(value, this.precision, this.$props)
     }
   }
 }
