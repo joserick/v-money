@@ -3,7 +3,7 @@ const {name, version} = require('./package.json')
 module.exports = {
     entry: 'src/index.js',
     output: {
-        html: false,
+        html: true,
         sourceMap: false,
         moduleName: 'VMoney',
         fileNames: {
