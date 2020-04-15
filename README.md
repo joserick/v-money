@@ -55,7 +55,7 @@ Vue.use(money, {precision: 4})
           min: Number.MIN_SAFE_INTEGER,
           max: Number.MAX_SAFE_INTEGER,
           minMaxMessage: 'From 100 to 200',
-          minMaxBlur: false
+          amend: false
         }
       }
     }
@@ -90,7 +90,7 @@ Must use `vmodel.lazy` to bind works properly.
           min: Number.MIN_SAFE_INTEGER,
           max: Number.MAX_SAFE_INTEGER,
           minMaxMessage: 'From 100 to 200',
-          minMaxBlur: false
+          amend: false
         }
       }
     },
@@ -114,7 +114,7 @@ Must use `vmodel.lazy` to bind works properly.
 | min           | false    | Number  | Number.MIN_SAFE_INTEGER | The min value allowed                                       |
 | max           | false    | Number  | Number.MAX_SAFE_INTEGER | The max value allowed                                       |
 | minMaxMessage | false    | String  | ""                      | Message if exceeding min or max value allowed               |
-| minMaxBlur    | false    | Boolean | false                   | In case of exceeding min or max, overwrite it when deselect |
+| amend         | false    | Boolean | false                   | In case of exceeding min or max, overwrite it when deselect |
 
 ### References
 
