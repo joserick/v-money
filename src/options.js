@@ -9,5 +9,5 @@ export default {
   max: Number.MAX_SAFE_INTEGER,
   placeholder: '',
   masked: false,
-  minMaxBlur: false
+  amend: false
 }
