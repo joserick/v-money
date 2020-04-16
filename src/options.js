@@ -7,7 +7,6 @@ export default {
   allowBlank: false,
   min: Number.MIN_SAFE_INTEGER,
   max: Number.MAX_SAFE_INTEGER,
-  placeholder: '',
   masked: false,
   amend: false
 }

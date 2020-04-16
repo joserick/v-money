@@ -60,10 +60,6 @@ export default {
       type: Number,
       default: () => defaults.min
     },
-    step: {
-      type: Number,
-      default: () => defaults.step
-    },
     amend: {
       type: Boolean,
       default: () => defaults.amend
