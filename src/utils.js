@@ -22,6 +22,7 @@ const format = (input, opt = defaults) => {
 }
 
 const unformat = (input, precision, opt = defaults) => {
+  if (typeof input !== 'string') return input
   const clear = removePrefixSuffix(input, opt)
   const negative = clear.indexOf('-') >= 0 ? -1 : 1
   const numbers = onlyNumbers(clear)
