@@ -3,6 +3,7 @@ import assign from './assign'
 import defaults from './options'
 
 export default (el, binding) => {
+
   if (!binding.value) return
   const opt = assign(defaults, binding.value)
 
@@ -27,11 +28,7 @@ export default (el, binding) => {
 
   el.oninput = () => {
     let positionFromEnd = el.value.length - el.selectionEnd
-    try{
-      el.__vue__.innerValue = format(el.value, opt)
-    }catch(e){
-      el.value  = format(el.value, opt)
-    }
+    el.value  = format(el.value, opt)
     positionFromEnd = Math.max(positionFromEnd, opt.suffix.length) // right
     positionFromEnd = el.value.length - positionFromEnd
     positionFromEnd = Math.max(positionFromEnd, opt.prefix.length + 1) // left
